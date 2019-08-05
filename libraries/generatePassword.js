@@ -1,8 +1,8 @@
-/*
+
 const bcrypt = require('bcrypt')
 const saltRounds = 10
 
-/* Custom Library 
+/* Custom Library */
 
 let hashpassword = (myPlaintextPassword) => {
   let salt = bcrypt.genSaltSync(saltRounds)
@@ -31,4 +31,4 @@ module.exports = {
   comparePassword: comparePassword,
   comparePasswordSync: comparePasswordSync
 }
-*/
+
