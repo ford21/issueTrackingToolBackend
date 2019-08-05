@@ -3,7 +3,7 @@ const shortid = require('shortid');
 const response = require('./../libraries/responseLib')
 const check = require('./../libraries/checkLib')
 const validateInput = require('./../libraries/signupValidation')
-const passwordGenerator = require('./../libraries/generatePassword')
+//const passwordGenerator = require('./../libraries/generatePassword')
 const token = require('./../libraries/tokenLib')
 const time = require('./../libraries/timeLib')
 const cookie = require('cookie-parser')
@@ -132,7 +132,7 @@ let createUser = (req, res) => {
                         console.log(req.body)
                         let today = Date.now()
                         let userId = shortid.generate()
-                        let password = passwordGenerator.hashpassword(req.body.password)
+                        //let password = passwordGenerator.hashpassword(req.body.password)
                         let newUser = new UserModel({
                             userId: userId,
                             firstName: req.body.firstName,
@@ -212,7 +212,7 @@ let loginFunction = (req, res) => {
     let validatePassword = (retrievedUserDetails) => {
         console.log("validatePassword");
         return new Promise((resolve, reject) => {
-            passwordGenerator.comparePassword(req.body.password, retrievedUserDetails.password, (err, isMatch) => {
+            //passwordGenerator.comparePassword(req.body.password, retrievedUserDetails.password, (err, isMatch) => {
                 if (err) {
                     console.log(err)
                     let apiResponse = response.generate(true, 'Login Failed', 500, null)
@@ -229,7 +229,7 @@ let loginFunction = (req, res) => {
                     let apiResponse = response.generate(true, 'Wrong Password Login Failed', 400, null)
                     reject(apiResponse)
                 }
-            })
+           // })
         })
     }
 
@@ -382,7 +382,7 @@ let resetPassword = (req, res) => {
     let reset = () => {
         return new Promise((resolve, reject) => {
             if (req.body.password) {
-                let password = passwordGenerator.hashpassword(req.body.password)
+                //let password = passwordGenerator.hashpassword(req.body.password)
                 UserModel.updateOne({ 'email': req.body.email }, {"$set":{"password":password}}, { multi: false }).exec((err, result) => {
                     if (err) {
                         let apiResponse = response.generate(true, 'Error Occured.', 500, null)
